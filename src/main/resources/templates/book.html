@@ -7,19 +7,22 @@
 
 </head>
 <body>
-    <div class="card mb-3" style="max-width: 540px;">
+   <div class="container">
+    <div style="max-width: 700px;margin-left: 300px;margin-top: 100px; border: 3px solid black;border-radius: 16px">
         <div class="row g-0">
             <div class="col-md-4">
-                <img src="..." class="img-fluid rounded-start" alt="...">
+                <img th:src="${coverImageUrl}" class="img-fluid rounded-start" alt="...">
             </div>
             <div class="col-md-8">
                 <div class="card-body">
-                    <h5 class="card-title" th:text="${book.name}">Book Name</h5>
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    <h5 class="card-title display-6" th:text="${book.name}" style="font-family: Apple Chancery, cursive; color: #12583e">Book Name</h5>
+                    <p class="card-text display-7">Author Name</p>
+                    <p class="card-text" th:text="${book.description}">Book Description</p>
+                    <p class="card-text">Published Date: <small class="text-muted" th:text="${book.publishedDate}">Published Date</small></p>
                 </div>
             </div>
         </div>
     </div>
+   </div>
 </body>
 </html>

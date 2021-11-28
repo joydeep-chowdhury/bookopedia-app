@@ -7,6 +7,8 @@ import org.springframework.ui.Model;
 
 import java.util.Optional;
 
+import static com.joydeep.poc.utils.BookUtils.BOOK_COVER_TEMPLATE_URL;
+
 @Service
 public class BookService implements EntityService<Book> {
 
@@ -21,6 +23,11 @@ public class BookService implements EntityService<Book> {
         Optional<Book> optionalBook = bookRepository.findById(bookId);
         if (optionalBook.isPresent()) {
             Book book = optionalBook.get();
+            String bookCoverFinalUrl = "/static/images/no-image.jpg";
+            if(book.getCoverIds()!=null && !book.getCoverIds().isEmpty()){
+                bookCoverFinalUrl = String.format(BOOK_COVER_TEMPLATE_URL,book.getCoverIds().get(0));
+            }
+            model.addAttribute("coverImageUrl",bookCoverFinalUrl);
             model.addAttribute("book", book);
             return "book";
         }
