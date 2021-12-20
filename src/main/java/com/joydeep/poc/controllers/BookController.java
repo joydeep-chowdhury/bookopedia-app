@@ -2,6 +2,8 @@ package com.joydeep.poc.controllers;
 
 import com.joydeep.poc.models.Book;
 import com.joydeep.poc.services.EntityService;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +21,11 @@ public class BookController {
     }
 
     @GetMapping(value = "/{bookId}")
-    public String getBook(@PathVariable String bookId, Model model) {
+    public String getBook(@PathVariable String bookId, Model model, @AuthenticationPrincipal OAuth2User principle) {
+        if(principle!=null && principle.getAttribute("login")!= null){
+            model.addAttribute("loginId",principle.getAttribute("login"));
+        }
+
         return bookService.getEntityPageById(bookId, model);
     }
 
